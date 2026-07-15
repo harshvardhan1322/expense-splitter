@@ -39,9 +39,12 @@ export default function ExpenseForm({ members, onAdd }) {
       ? (toCents(amount) / 100 / participants.size).toFixed(2)
       : null;
 
+  const canSubmit =
+    Boolean(description.trim()) && toCents(amount) > 0 && participants.size > 0;
+
   return (
     <form className="card expense-form" onSubmit={submit}>
-      <h3>Add an expense</h3>
+      <h3 className="card__title">Add an expense</h3>
       <div className="expense-form__row">
         <input
           className="grow"
@@ -66,8 +69,8 @@ export default function ExpenseForm({ members, onAdd }) {
         </select>
       </div>
 
-      <div className="expense-form__participants">
-        <span className="muted">Split equally between:</span>
+      <div className="expense-form__split">
+        <span className="eyebrow">Split between</span>
         {members.map((m) => (
           <label key={m.id} className="check">
             <input
@@ -81,12 +84,10 @@ export default function ExpenseForm({ members, onAdd }) {
       </div>
 
       <div className="expense-form__footer">
-        {perHead && (
-          <span className="muted">
-            ₹{perHead} each · {participants.size} people
-          </span>
-        )}
-        <button type="submit" className="btn btn--primary">
+        <span className="faint small num">
+          {perHead ? `₹${perHead} each · ${participants.size} people` : ''}
+        </span>
+        <button type="submit" className="btn btn--primary" disabled={!canSubmit}>
           Add expense
         </button>
       </div>

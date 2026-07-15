@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
-import { api } from './api.js';
+import { api, formatMoney } from './api.js';
+import { initials, tintFor } from './ui.js';
 import GroupSidebar from './components/GroupSidebar.jsx';
 import ExpenseForm from './components/ExpenseForm.jsx';
 import ExpenseList from './components/ExpenseList.jsx';
@@ -57,16 +58,26 @@ export default function App() {
     }
   }
 
+  const totalCents = expenses.reduce((sum, e) => sum + e.amount_cents, 0);
+
   return (
     <div className="app">
-      <header className="app__header">
-        <h1>💸 Expense Splitter</h1>
-        <p className="app__subtitle">
-          Split group expenses and settle up in the fewest possible payments.
-        </p>
+      <header className="masthead">
+        <div>
+          <h1>Expense Splitter</h1>
+          <p className="masthead__sub">
+            Settle group spending in the fewest transfers.
+          </p>
+        </div>
+        {group && (
+          <div className="masthead__stat">
+            <span className="eyebrow">Total spent</span>
+            <span className="value num">{formatMoney(totalCents)}</span>
+          </div>
+        )}
       </header>
 
-      {error && <div className="banner banner--error">⚠️ {error}</div>}
+      {error && <div className="banner banner--error">{error}</div>}
 
       <div className="layout">
         <GroupSidebar
@@ -88,18 +99,31 @@ export default function App() {
         <main className="content">
           {!group ? (
             <div className="empty">
-              <p>Create a group to get started 👈</p>
+              <p>Create a group to get started.</p>
             </div>
           ) : (
             <>
               <section className="card">
-                <h2>{group.name}</h2>
-                <div className="members">
-                  {group.members.map((m) => (
-                    <span key={m.id} className="chip">
-                      {m.name}
-                    </span>
-                  ))}
+                <div className="group-head">
+                  <div>
+                    <h2>{group.name}</h2>
+                    <p className="group-head__meta">
+                      {group.members.length} members · {expenses.length} expense
+                      {expenses.length === 1 ? '' : 's'}
+                    </p>
+                  </div>
+                  <div className="avatar-stack">
+                    {group.members.map((m) => (
+                      <span
+                        key={m.id}
+                        className="avatar"
+                        style={{ background: tintFor(m.name) }}
+                        title={m.name}
+                      >
+                        {initials(m.name)}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </section>
 

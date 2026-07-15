@@ -1,4 +1,4 @@
-# 💸 Expense Splitter with Settlement Algorithm
+# Expense Splitter with Settlement Algorithm
 
 A full-stack app to split shared group expenses (trips, flatmates, dinners) and
 settle everyone up in the **fewest possible payments**. Built as a portfolio
