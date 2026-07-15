@@ -17,15 +17,16 @@ async function request(path, options = {}) {
   return res.json();
 }
 
-// Convert a "12.50" dollar string to integer cents, rounding safely.
-export function toCents(dollars) {
-  return Math.round(parseFloat(dollars) * 100);
+// Convert a "12.50" rupee string to integer paise (1 rupee = 100 paise),
+// rounding safely so we never store a fractional smallest-unit.
+export function toCents(rupees) {
+  return Math.round(parseFloat(rupees) * 100);
 }
 
-export function formatMoney(cents) {
-  return (cents / 100).toLocaleString(undefined, {
+export function formatMoney(paise) {
+  return (paise / 100).toLocaleString('en-IN', {
     style: 'currency',
-    currency: 'USD',
+    currency: 'INR',
   });
 }
 

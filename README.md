@@ -25,8 +25,9 @@ most `n − 1` transfers** using a greedy "min cash flow" strategy:
 > interviews.
 
 **Money is stored as integer cents everywhere** to avoid floating-point
-rounding bugs (`0.1 + 0.2 !== 0.3`). Indivisible remainders (e.g. $10 split 3
-ways) are distributed a penny at a time so shares always sum back to the total.
+rounding bugs (`0.1 + 0.2 !== 0.3`). Amounts are held in the smallest unit —
+**paise** (1 rupee = 100 paise). Indivisible remainders (e.g. ₹10 split 3 ways)
+are distributed one paisa at a time so shares always sum back to the total.
 
 See the implementation in
 [`backend/src/settlement.js`](backend/src/settlement.js) and its tests in

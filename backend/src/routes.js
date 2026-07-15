@@ -8,7 +8,7 @@ import { settle } from './settlement.js';
 export function createRouter(repo) {
   const router = Router();
 
-  const asDollars = (cents) => cents / 100;
+  const toRupees = (paise) => paise / 100;
 
   // ---- Groups ---------------------------------------------------------
   router.get('/groups', (req, res) => {
@@ -113,7 +113,7 @@ export function createRouter(repo) {
         memberId: b.memberId,
         name: nameOf[b.memberId],
         netCents: b.netCents,
-        net: asDollars(b.netCents),
+        net: toRupees(b.netCents),
       })),
       settlements: settlements.map((s) => ({
         from: s.from,
@@ -121,7 +121,7 @@ export function createRouter(repo) {
         to: s.to,
         toName: nameOf[s.to],
         amountCents: s.amountCents,
-        amount: asDollars(s.amountCents),
+        amount: toRupees(s.amountCents),
       })),
     });
   });

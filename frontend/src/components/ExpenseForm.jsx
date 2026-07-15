@@ -83,7 +83,7 @@ export default function ExpenseForm({ members, onAdd }) {
       <div className="expense-form__footer">
         {perHead && (
           <span className="muted">
-            ${perHead} each · {participants.size} people
+            ₹{perHead} each · {participants.size} people
           </span>
         )}
         <button type="submit" className="btn btn--primary">
