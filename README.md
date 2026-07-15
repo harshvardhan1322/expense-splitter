@@ -7,6 +7,12 @@ React frontend.
 
 ![stack](https://img.shields.io/badge/stack-React%20%2B%20Express%20%2B%20SQLite-6366f1)
 
+![Expense Splitter screenshot](docs/screenshot.png)
+
+> Balances always reconcile to zero and the app settles everyone up in the
+> fewest transfers — here, 5 expenses across 3 flatmates collapse into just
+> 2 payments.
+
 ## Why this project is interesting
 
 The core is the **settlement algorithm**. Naively, if 5 friends owe each other
