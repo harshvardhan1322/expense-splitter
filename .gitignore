@@ -10,3 +10,6 @@ backend/data/
 
 .DS_Store
 .env
+
+# Local Claude Code settings
+.claude/
